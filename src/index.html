@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>awdev 0.9 NFT</title>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#0f172a,#1e293b);
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.card {
+  background:#111827;
+  padding:30px;
+  border-radius:16px;
+  width:350px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  text-align:center;
+}
+
+h1 {
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+button {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.2s;
+}
+
+.connect { background:#22c55e; color:black; }
+.mint { background:#3b82f6; }
+.claim { background:#f59e0b; }
+
+button:hover {
+  transform:scale(1.03);
+}
+
+small { color:#94a3b8; }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>awdev 0.9 NFT</h1>
+  <small>Modern Web3 Dashboard</small>
+
+  <p id="wallet">Not connected</p>
+
+  <button class="connect" onclick="connectWallet()">Connect Wallet</button>
+  <button class="mint" onclick="mintNFT()">Mint NFT</button>
+  <button class="claim" onclick="claimReward()">Claim Reward</button>
+</div>
+
+<script>
+const contractAddress = "0xYOUR_CONTRACT_ADDRESS";
+
+const abi = [
+  "function mint(address to)",
+  "function claimRewards()"
+];
+
+let signer;
+let contract;
+let userAddress;
+
+// connect wallet
+async function connectWallet() {
+  if (!window.ethereum) return alert("Install MetaMask");
+
+  const provider = new ethers.BrowserProvider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+
+  signer = await provider.getSigner();
+  userAddress = await signer.getAddress();
+
+  contract = new ethers.Contract(contractAddress, abi, signer);
+
+  document.getElementById("wallet").innerText =
+    "Connected: " + userAddress;
+}
+
+// mint NFT
+async function mintNFT() {
+  if (!contract) return alert("Connect wallet dulu");
+
+  try {
+    const tx = await contract.mint(userAddress);
+    await tx.wait();
+    alert("NFT minted!");
+  } catch (e) {
+    alert("Error mint");
+    console.log(e);
+  }
+}
+
+// claim reward
+async function claimReward() {
+  if (!contract) return alert("Connect wallet dulu");
+
+  try {
+    const tx = await contract.claimRewards();
+    await tx.wait();
+    alert("Reward claimed!");
+  } catch (e) {
+    alert("Claim gagal");
+    console.log(e);
+  }
+}
+</script>
+
+</body>
+</html>
