@@ -1,0 +1,25 @@
+{
+  "project": "awdevNFT 0.9",
+  "chain": "polygon",
+  "contract": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",
+  "wallets": [
+    {
+      "address": "0x5E8Bade6E0BCe65807dB6327cB1D9EEb7C6A6A5B",
+      "received": "0.05",
+      "currency": "MATIC",
+      "status": "unclaimed",
+      "claimable": true
+    }
+  ],
+  "rules": {
+    "claimFunction": "claimRewards()",
+    "requireNFT": true,
+    "minStakingTime": 3600
+  }
+}
+{
+  "evm": "0x5E8Bade6E0BCe65807dB6327cB1D9EEb7C6A6A5B",
+  "tron": "TBh1vo5wazVxz5FCqmkVZSDAG2RgXJRPbo",
+  "solana": "CAiFqMZQ4gyQEwbNLZypvA1PbXB57aSzciaHywBgbzh6",
+  "btc": "bc1qfwn7lfntn5jyl9yxgcrnhu4gaz8w5mnua0acyt"
+}

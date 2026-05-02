@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>awdevNFT dApp</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>awdevNFT dApp</h1>
+  <p>Web3 Production Ready</p>
+
+  <div id="wallet">Not connected</div>
+
+  <button onclick="connectWallet()">Connect Wallet</button>
+  <button onclick="mintNFT()">Mint NFT</button>
+  <button onclick="claimReward()">Claim Reward</button>
+</div>
+
+<div class="box">
+  <h2>awdevNFT PRO</h2>
+
+  <button onclick="connect()">Connect Wallet</button>
+  <button onclick="mint()">Mint NFT</button>
+  <button onclick="stake()">Stake NFT #0</button>
+  <button onclick="unstake()">Unstake NFT #0</button>
+
+  <img id="nft" />
+
+</div>
+
+<script>
+let signer, contract;
+
+const nftAddress = "NFT_CONTRACT";
+const stakingAddress = "STAKING_CONTRACT";
+
+const nftAbi = [
+  "function mint(address to, string uri)",
+];
+
+const stakeAbi = [
+  "function stake(uint256)",
+  "function unstake(uint256)"
+];
+
+async function connect() {
+  const provider = new ethers.BrowserProvider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+
+  signer = await provider.getSigner();
+
+  contract = new ethers.Contract(stakingAddress, stakeAbi, signer);
+}
+
+async function mint() {
+  const nft = new ethers.Contract(nftAddress, nftAbi, signer);
+
+  await nft.mint(
+    await signer.getAddress(),
+    "ipfs://YOUR_METADATA"
+  );
+
+  alert("NFT minted");
+}
+
+async function stake() {
+  await contract.stake(0);
+  alert("NFT staked");
+}
+
+async function unstake() {
+  await contract.unstake(0);
+  alert("unstaked + reward");
+}
+</script>
+
+
+<script src="contract.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
