@@ -1,6 +1,4 @@
-# awdevnf
-
-# Pembuatan Web NFT Modern
+# awdevNFT | Pembuatan Web NFT Modern
 
 ## Ringkasan Eksekutif  
 Laporan ini membahas secara mendalam pembuatan situs web NFT modern dari nol. Kami mengulas kebutuhan proyek (dengan asumsi *file sumber tidak tersedia*), pemilihan **teknologi stack** (React/Next.js, Chakra/Tailwind, Next API/Express, Hardhat/Solidity, IPFS/Pinata, Web3Modal/ethers), arsitektur proyek, desain UI/UX, kode kontrak pintar, backend, skrip, pengujian, lisensi, dan estimasi waktu. Setiap keputusan teknologi dilengkapi alasan dan trade-off dari literatur resmiã€24â€ L175-L183ã€‘ã€26â€ L122-L127ã€‘ã€29â€ L204-L212ã€‘. Tabel perbandingan stack dan struktur folder dijabarkan, diikuti contoh kode Solidity (ERC-721/1155) dan skrip Hardhatã€33â€ L147-L153ã€‘ã€35â€ L172-L179ã€‘. Diagram mermaid menyajikan alur *minting* NFT dan jadwal proyek. Juga disertakan mockup UI (gambar ilustrasi) dan instruksi pembuatan file proyek siap unduh. 
